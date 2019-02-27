@@ -5,7 +5,6 @@ exports.up = function(knex, Promise) {
         table.string('name').notNull()
         table.string('site').notNull().unique()
         table.timestamp('createdAt').defaultTo(knex.fn.now())
-        table.timestamp('updatedAt').defaultTo(knex.fn.now())
     })
 };
 

@@ -123,5 +123,21 @@ module.exports = app => {
         
     }
 
-    return { create, update, remove, get, getById }
+    const getCompaniesFromUser = async (req, res, next) => {
+        const userId = req.params.id
+        try {
+            app.db('users')
+                .select('companies.id', 'companies.name', 'companies.site')
+                .innerJoin('usersCompany', 'users.id', 'usersCompany.userId')
+                .innerJoin('companies', 'companies.id', 'usersCompany.companyId')
+                .where('users.id', '=', userId)
+                .then(data => res.status(200).send(data))
+                .catch(err => res.status(500).send(data))
+        } catch (err) {
+            return res.status(500).send(err)
+        }
+        
+    }
+
+    return { create, update, remove, get, getById, getCompaniesFromUser }
 }

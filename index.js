@@ -11,7 +11,7 @@ consign()
     .then('./middlewares/bodyparser-cors.js')
     .then('./api/validation.js')
     .then('./api')
-    .then('./routes/index.js')
+    .then('./routes')
     .into(app)
 
 app.listen(3000, () => {
